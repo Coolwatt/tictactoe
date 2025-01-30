@@ -27,18 +27,25 @@ void initializeBoard() {
 
 void drawBoard() {
     system("cls");
-    printf("\n\n\t Tic Tac Toe (%d x %d) \n\n", N, N);
-    printf("Player1 (X) - Player2/Computer (O) \n\n");
+    printf("\n\n\t \033[1;36mTic Tac Toe (%d x %d)\033[0m \n\n", N, N);
+    printf("\033[1;33mPlayer1 (X) - Player2/Computer (O)\033[0m \n\n");
 
     for (int i = 0; i < N; i++) {
         for (int j = 0; j < N; j++) {
-            printf("  %c  ", board[i][j]);
-            if (j < N - 1) printf("|");
+            char symbol = board[i][j];
+            if (symbol == 'X')
+                printf("  \033[1;31m%c\033[0m  ", symbol);  // Red 'X'
+            else if (symbol == 'O')
+                printf("  \033[1;34m%c\033[0m  ", symbol);  // Blue 'O'
+            else
+                printf("     ");
+
+            if (j < N - 1) printf("\033[1;32m|\033[0m"); // Green vertical lines
         }
         printf("\n");
         if (i < N - 1) {
             for (int j = 0; j < N; j++)
-                printf("----- ");
+                printf("\033[1;32m-----\033[0m "); // Green horizontal lines
             printf("\n");
         }
     }
@@ -117,7 +124,7 @@ int findBestMove() {
 }
 
 int main() {
-    system("color 1a");
+    system("color 1A");
     int player = 1, i, choice;
     char mark;
     int mode, row, col;
@@ -150,7 +157,7 @@ int main() {
         }
         if (row >= 0 && row < N && col >= 0 && col < N && board[row][col] == ' ') {
             board[row][col] = mark;
-            playSound(9000);
+            playSound(900);
             i = checkWin();
             if (i == -1) player = 3 - player;
         } else if (mode == 1 || player == 1) {
@@ -160,11 +167,11 @@ int main() {
     } while (i == -1);
 
     drawBoard();
-    if (i == 10) printf("==> Player 1 (X) won!\n");
-    else if (i == -10) printf("==> Player 2 (O) won!\n");
-    else printf("==> Game draw!\n");
+    if (i == 10) printf("\033[1;32m==> Player 1 (X) won!\033[0m\n");
+    else if (i == -10) printf("\033[1;31m==> Player 2 (O) won!\033[0m\n");
+    else printf("\033[1;33m==> Game draw!\033[0m\n");
     
-    playSound(10000);
+    playSound(1000000000);
     printf("\nPress Enter to exit...");
     getchar();
     getchar();
