@@ -34,18 +34,18 @@ void drawBoard() {
         for (int j = 0; j < N; j++) {
             char symbol = board[i][j];
             if (symbol == 'X')
-                printf("  \033[1;31m%c\033[0m  ", symbol);  // Red 'X'
+                printf("  \033[1;31m%c\033[0m  ", symbol); '
             else if (symbol == 'O')
-                printf("  \033[1;34m%c\033[0m  ", symbol);  // Blue 'O'
+                printf("  \033[1;34m%c\033[0m  ", symbol);  
             else
                 printf("     ");
 
-            if (j < N - 1) printf("\033[1;32m|\033[0m"); // Green vertical lines
+            if (j < N - 1) printf("\033[1;32m|\033[0m"); 
         }
         printf("\n");
         if (i < N - 1) {
             for (int j = 0; j < N; j++)
-                printf("\033[1;32m-----\033[0m "); // Green horizontal lines
+                printf("\033[1;32m-----\033[0m "); 
             printf("\n");
         }
     }
